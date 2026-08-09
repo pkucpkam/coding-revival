@@ -1,0 +1,1202 @@
+window.QUIZ_DATA = [
+  {
+    "id": 1,
+    "text": "JSP là viết tắt của từ gì?",
+    "options": {
+      "A": "Java Server Pages",
+      "B": "Java Script Pages",
+      "C": "Java Standard Pages",
+      "D": "Java Server Print"
+    },
+    "answer": "A",
+    "explanation": "Theo tài liệu, JSP = Java Server Pages, công nghệ kết hợp HTML và Java."
+  },
+  {
+    "id": 2,
+    "text": "Điểm khác biệt cơ bản giữa Servlet và JSP là gì?",
+    "options": {
+      "A": "JSP biên dịch trực tiếp ra Bytecode mà không qua Servlet.",
+      "B": "Servlet là HTML nhúng Java, còn JSP là Java nhúng HTML.",
+      "C": "Servlet là Java code với HTML print, JSP là HTML với Java code nhúng.",
+      "D": "JSP chỉ chạy ở client, Servlet chạy ở server."
+    },
+    "answer": "C",
+    "explanation": "Tài liệu nêu rõ: Servlet là Code Java với HTML print, JSP là HTML với Java code nhúng."
+  },
+  {
+    "id": 3,
+    "text": "Quy trình biên dịch JSP diễn ra theo thứ tự nào?",
+    "options": {
+      "A": "JSP → Bytecode → Servlet → Chạy",
+      "B": "JSP → Servlet (.java) → Bytecode (.class) → Chạy",
+      "C": "JSP → HTML → Servlet → Bytecode",
+      "D": "Servlet → JSP → Bytecode → Chạy"
+    },
+    "answer": "B",
+    "explanation": "Tomcat biên dịch JSP thành Servlet (.java), sau đó biên dịch thành Bytecode (.class) rồi mới chạy."
+  },
+  {
+    "id": 4,
+    "text": "Tên của class Servlet được sinh ra từ file `hello.jsp` mặc định là gì?",
+    "options": {
+      "A": "hello_jsp.java",
+      "B": "hello.servlet.java",
+      "C": "hello_jsp_servlet.java",
+      "D": "HelloJsp.java"
+    },
+    "answer": "A",
+    "explanation": "Trong ví dụ quá trình biên dịch, file `hello.jsp` sinh ra Servlet `hello_jsp.java`."
+  },
+  {
+    "id": 5,
+    "text": "Trong 4 yếu tố chính của JSP, thẻ nào dùng để báo cho Tomcat hướng dẫn về JSP?",
+    "options": {
+      "A": "Scriptlet",
+      "B": "Expression",
+      "C": "Declaration",
+      "D": "Directive"
+    },
+    "answer": "D",
+    "explanation": "Directive (<%@ ... %>) có mục đích báo cho Tomcat hướng dẫn về JSP."
+  },
+  {
+    "id": 6,
+    "text": "Cú pháp của Include Directive là gì?",
+    "options": {
+      "A": "<% include file=\"header.jsp\" %>",
+      "B": "<jsp:include page=\"header.jsp\" />",
+      "C": "<%@ include file=\"header.jsp\" %>",
+      "D": "<@ include page=\"header.jsp\" @>"
+    },
+    "answer": "C",
+    "explanation": "Cú pháp chuẩn của Include Directive là `<%@ include file=\"...\" %>`."
+  },
+  {
+    "id": 7,
+    "text": "Khẳng định nào đúng về Scriptlet trong JSP?",
+    "options": {
+      "A": "Dùng để khai báo biến ở mức class.",
+      "B": "Dùng để in giá trị ra trang web.",
+      "C": "Dùng để báo Tomcat import thư viện.",
+      "D": "Dùng để nhúng Java code trực tiếp vào JSP (loop, if/else)."
+    },
+    "answer": "D",
+    "explanation": "Scriptlet `<% ... %>` dùng để viết logic phức tạp, khai báo biến local, loop, if/else."
+  },
+  {
+    "id": 8,
+    "text": "Cú pháp JSP nào tương đương với `out.print(expression);`?",
+    "options": {
+      "A": "<% expression %>",
+      "B": "<%= expression %>",
+      "C": "<%! expression %>",
+      "D": "<%@ expression %>"
+    },
+    "answer": "B",
+    "explanation": "Expression `<%= ... %>` dùng để in giá trị, tương đương với `out.print(expression);`."
+  },
+  {
+    "id": 9,
+    "text": "Thẻ Declaration `<%! ... %>` dùng để làm gì?",
+    "options": {
+      "A": "Khai báo biến local.",
+      "B": "Import thư viện.",
+      "C": "Khai báo biến hoặc method ở mức class.",
+      "D": "In trực tiếp giá trị ra HTML."
+    },
+    "answer": "C",
+    "explanation": "Declaration `<%! ... %>` dùng để khai báo biến instance hoặc method, toàn bộ JSP có thể truy cập."
+  },
+  {
+    "id": 10,
+    "text": "Giai đoạn nào KHÔNG nằm trong vòng đời (Lifecycle) của JSP?",
+    "options": {
+      "A": "Translation",
+      "B": "Serialization",
+      "C": "Compilation",
+      "D": "Instantiation"
+    },
+    "answer": "B",
+    "explanation": "5 giai đoạn chính là Translation, Compilation, Loading, Instantiation, Initialization. Không có Serialization."
+  },
+  {
+    "id": 11,
+    "text": "Cho đoạn code JSP sau, kết quả hiển thị trên trình duyệt là gì?\r\n```jsp\r\n<% int a = 5; int b = 3; %>\r\n<p>Tổng: <%= a + b %></p>\r\n```",
+    "options": {
+      "A": "Tổng: <%= a + b %>",
+      "B": "Tổng: 8",
+      "C": "Tổng: 53",
+      "D": "Lỗi biên dịch"
+    },
+    "answer": "B",
+    "explanation": "Thẻ Expression `<%= a + b %>` tính và in ra giá trị 8 kèm theo thẻ HTML xung quanh."
+  },
+  {
+    "id": 12,
+    "text": "Xét file `counter.jsp` có đoạn code sau. Lần thứ 2 tải lại (reload) trang này, giá trị in ra là bao nhiêu?\r\n```jsp\r\n<%! int count = 0; %>\r\n<% count++; %>\r\nLượt truy cập: <%= count %>\r\n```",
+    "options": {
+      "A": "Lượt truy cập: 0",
+      "B": "Lượt truy cập: 1",
+      "C": "Lượt truy cập: 2",
+      "D": "Lỗi vì khai báo lại biến count"
+    },
+    "answer": "C",
+    "explanation": "`count` được khai báo bằng `<%! %>` nên là biến instance (tồn tại suốt vòng đời servlet). Mỗi lần reload (request mới) gọi `_jspService`, `count` tăng lên 1, lần 2 sẽ là 2."
+  },
+  {
+    "id": 13,
+    "text": "Output của đoạn code Scriptlet vòng lặp sau là gì?\r\n```jsp\r\n<% for(int i=1; i<=2; i++) { %>\r\n    <b><%= i %></b>\r\n<% } %>\r\n```",
+    "options": {
+      "A": "12",
+      "B": "ii",
+      "C": "1 2",
+      "D": "12"
+    },
+    "answer": "A",
+    "explanation": "Vòng lặp chạy 2 lần, mỗi lần sinh ra HTML `<b>` chứa giá trị của `i`."
+  },
+  {
+    "id": 14,
+    "text": "Output của đoạn code sau nếu request parameter \"name\" không được truyền lên URL?\r\n```jsp\r\n<h1>Hello <%= request.getParameter(\"name\") %></h1>\r\n```",
+    "options": {
+      "A": "Hello",
+      "B": "Hello null",
+      "C": "Hello \"\" (chuỗi rỗng)",
+      "D": "Trang báo lỗi NullPointerException"
+    },
+    "answer": "B",
+    "explanation": "`request.getParameter()` trả về null nếu không có param. Thẻ `<%= %>` sẽ gọi `.toString()`, in ra chuỗi \"null\"."
+  },
+  {
+    "id": 15,
+    "text": "Xét đoạn code Declaration sau, hàm getGreeting sẽ trả về gì nếu gọi `<%= getGreeting(\"Tom\") %>`?\r\n```jsp\r\n<%! \r\n    public String getGreeting(String name) {\r\n        return \"Hello \" + name + \"!\";\r\n    }\r\n%>\r\n```",
+    "options": {
+      "A": "Hello name!",
+      "B": "Hello Tom",
+      "C": "Hello Tom!",
+      "D": "Hello + Tom + !"
+    },
+    "answer": "C",
+    "explanation": "Hàm nối chuỗi tiêu chuẩn của Java, trả về đúng \"Hello Tom!\"."
+  },
+  {
+    "id": 16,
+    "text": "Cho đoạn code sau, output hiển thị là gì?\r\n```jsp\r\n<% int x = 10; %>\r\n<%! int x = 20; %>\r\n<%= x %>\r\n```",
+    "options": {
+      "A": "10",
+      "B": "20",
+      "C": "30",
+      "D": "Lỗi biên dịch do trùng tên biến"
+    },
+    "answer": "A",
+    "explanation": "`<% int x = 10; %>` là biến local trong `_jspService`, `<%! int x = 20; %>` là biến instance. Biến local sẽ ưu tiên (shadowing) nên in ra 10. Không lỗi biên dịch."
+  },
+  {
+    "id": 17,
+    "text": "(Tìm lỗi sai) Đoạn code JSP dưới đây có lỗi gì gây hỏng ứng dụng khi biên dịch?\r\n```jsp\r\n<p>Thời gian: <%= new java.util.Date(); %></p>\r\n```",
+    "options": {
+      "A": "Không import `java.util.Date`.",
+      "B": "Dư dấu chấm phẩy (;) trong thẻ Expression.",
+      "C": "Thiếu dấu ngoặc nhọn `{}`.",
+      "D": "Dùng sai thẻ, phải dùng `<% %>`."
+    },
+    "answer": "B",
+    "explanation": "Tài liệu ghi rõ \"Lưu ý: Expression không chứa dấu chấm phẩy (;) ở cuối\" vì nó được Tomcat dịch thành `out.print(new java.util.Date(););` gây lỗi cú pháp Java."
+  },
+  {
+    "id": 18,
+    "text": "(Tìm lỗi sai) Đoạn code dưới đây sinh lỗi khi request tới trang. Nguyên nhân là gì?\r\n```jsp\r\n<% \r\n   String name = request.getParameter(\"name\");\r\n   int age = 25\r\n   out.println(\"Hello \" + name);\r\n%>\r\n```",
+    "options": {
+      "A": "Gọi sai tên hàm `out.println`.",
+      "B": "Biến `name` không thể nhận giá trị từ `getParameter`.",
+      "C": "Thiếu dấu chấm phẩy (;) sau khai báo biến `age`.",
+      "D": "Không được dùng Scriptlet để in ra trang."
+    },
+    "answer": "C",
+    "explanation": "Bên trong Scriptlet `<% ... %>` là code Java thông thường, phải tuân thủ cú pháp Java (kết thúc lệnh bằng dấu chấm phẩy)."
+  },
+  {
+    "id": 19,
+    "text": "(Tìm lỗi sai) Đoạn JSP sau gặp vấn đề gì?\r\n```jsp\r\n<%! \r\n    String msg = \"Welcome\"; \r\n    out.print(msg);\r\n%>\r\n```",
+    "options": {
+      "A": "Không thể khai báo chuỗi trong Declaration.",
+      "B": "Đối tượng `out` (implicit object) không tồn tại trong Declaration mức class.",
+      "C": "Thẻ `<%! %>` không cho phép dùng dấu bằng (=).",
+      "D": "Lỗi do chưa import thư viện String."
+    },
+    "answer": "B",
+    "explanation": "`<%! ... %>` định nghĩa code bên ngoài method `_jspService`. Các Implicit Objects như `out`, `request` chỉ là local variables của method `_jspService`, nên không thể gọi trong Declaration."
+  },
+  {
+    "id": 20,
+    "text": "(Tìm lỗi sai) Lỗi sai trong cú pháp Directive sau là gì?\r\n```jsp\r\n<%@ page language=\"java\", contentType=\"text/html\" %>\r\n```",
+    "options": {
+      "A": "Dấu phẩy (,) phân cách giữa các thuộc tính là sai cú pháp.",
+      "B": "Thiếu dấu chấm phẩy ở cuối.",
+      "C": "page Directive không có thuộc tính contentType.",
+      "D": "Thuộc tính language phải là \"jsp\"."
+    },
+    "answer": "A",
+    "explanation": "Các thuộc tính trong Directive được phân cách bằng khoảng trắng, không dùng dấu phẩy (ví dụ: `<%@ page language=\"java\" contentType=\"...\" %>`)."
+  },
+  {
+    "id": 21,
+    "text": "Implicit Objects trong JSP là gì?",
+    "options": {
+      "A": "Các class tĩnh do lập trình viên tự tạo.",
+      "B": "Các đối tượng được Tomcat tự động cung cấp trong mỗi JSP mà không cần tạo.",
+      "C": "Các biến được kế thừa từ HTML.",
+      "D": "Đối tượng chỉ xuất hiện khi có lỗi."
+    },
+    "answer": "B",
+    "explanation": "Theo tài liệu, Implicit Objects là các object được Tomcat tự động cung cấp sẵn để dùng."
+  },
+  {
+    "id": 22,
+    "text": "Implicit object `request` thuộc class/interface nào?",
+    "options": {
+      "A": "javax.servlet.jsp.JspRequest",
+      "B": "javax.servlet.http.HttpServletRequest",
+      "C": "javax.servlet.Request",
+      "D": "javax.servlet.ServletRequest"
+    },
+    "answer": "B",
+    "explanation": "Tài liệu ghi rõ loại của request là `javax.servlet.http.HttpServletRequest`."
+  },
+  {
+    "id": 23,
+    "text": "Để lấy danh sách các giá trị từ một checkbox (nhiều giá trị cùng tên), dùng method nào của `request`?",
+    "options": {
+      "A": "request.getParameter()",
+      "B": "request.getParameters()",
+      "C": "request.getParameterValues()",
+      "D": "request.getAttributes()"
+    },
+    "answer": "C",
+    "explanation": "Lấy array giá trị dùng `request.getParameterValues(\"hobby\")`."
+  },
+  {
+    "id": 24,
+    "text": "Implicit object nào dùng để chuyển hướng (redirect) client sang một URL khác?",
+    "options": {
+      "A": "request",
+      "B": "response",
+      "C": "session",
+      "D": "application"
+    },
+    "answer": "B",
+    "explanation": "Sử dụng `response.sendRedirect(\"URL\");` để chuyển hướng."
+  },
+  {
+    "id": 25,
+    "text": "Phương thức `session.invalidate()` dùng để làm gì?",
+    "options": {
+      "A": "Làm mới thời gian hết hạn của session.",
+      "B": "Xóa một thuộc tính cụ thể trong session.",
+      "C": "Xóa toàn bộ session hiện tại.",
+      "D": "Lấy session ID."
+    },
+    "answer": "C",
+    "explanation": "Theo tài liệu phần 9.4, `sess.invalidate()` dùng để \"Xóa toàn bộ session\"."
+  },
+  {
+    "id": 26,
+    "text": "Để chia sẻ dữ liệu chung cho TẤT CẢ các client truy cập vào ứng dụng, dùng implicit object nào?",
+    "options": {
+      "A": "pageContext",
+      "B": "request",
+      "C": "session",
+      "D": "application"
+    },
+    "answer": "D",
+    "explanation": "Application object (ServletContext) lưu thông tin toàn ứng dụng, shared by all clients."
+  },
+  {
+    "id": 27,
+    "text": "Đối tượng `out` trong JSP có kiểu là gì?",
+    "options": {
+      "A": "java.io.PrintWriter",
+      "B": "javax.servlet.jsp.JspWriter",
+      "C": "java.io.OutputStream",
+      "D": "javax.servlet.jsp.JspOutput"
+    },
+    "answer": "B",
+    "explanation": "Tài liệu mục 9.6 nêu rõ loại của `out` là `javax.servlet.jsp.JspWriter`."
+  },
+  {
+    "id": 28,
+    "text": "Implicit object `config` dùng để làm gì?",
+    "options": {
+      "A": "Lấy thông tin cấu hình từ file web.xml (Init parameter).",
+      "B": "Cấu hình kết nối Database tự động.",
+      "C": "Đọc file config.properties.",
+      "D": "Khởi tạo Tomcat."
+    },
+    "answer": "A",
+    "explanation": "Config object dùng để \"Lấy thông tin config từ web.xml\", ví dụ qua `config.getInitParameter()`."
+  },
+  {
+    "id": 29,
+    "text": "Đối tượng `pageContext` có thể làm gì?",
+    "options": {
+      "A": "Chỉ truy cập được phạm vi request.",
+      "B": "Đóng gói request và gửi về DB.",
+      "C": "Truy cập tất cả các implicit object và thiết lập biến ở cả 4 scope.",
+      "D": "Xóa bộ nhớ đệm của trình duyệt."
+    },
+    "answer": "C",
+    "explanation": "Mục 9.8 chỉ ra `pageContext` truy cập tất cả implicit object và scope (PAGE, REQUEST, SESSION, APPLICATION)."
+  },
+  {
+    "id": 30,
+    "text": "Để thiết lập thời gian timeout cho session là 30 phút, phương thức nào đúng?",
+    "options": {
+      "A": "session.setTimeout(30);",
+      "B": "session.setMaxInactiveInterval(30);",
+      "C": "session.setLifeTime(30);",
+      "D": "session.setMaxTime(1800);"
+    },
+    "answer": "B",
+    "explanation": "Cú pháp chuẩn trong tài liệu là `sess.setMaxInactiveInterval(30);`. (Lưu ý: tham số truyền vào Javadoc chuẩn là giây, nhưng theo text tài liệu viết \"Set timeout (phút)\" là một cách diễn giải, gọi đúng tên method là B)."
+  },
+  {
+    "id": 31,
+    "text": "Cho đoạn code sau, output trên màn hình là gì nếu URI là `/app/home`?\r\n```jsp\r\n<p>Current: <%= request.getRequestURI() %></p>\r\n```",
+    "options": {
+      "A": "Current: localhost",
+      "B": "Current: GET",
+      "C": "Current: /app/home",
+      "D": "Current: 8080"
+    },
+    "answer": "C",
+    "explanation": "`request.getRequestURI()` trả về URI của request, trong ví dụ là `/app/home`."
+  },
+  {
+    "id": 32,
+    "text": "Output của đoạn mã sau sẽ chuyển hướng người dùng đến đâu?\r\n```jsp\r\n<%\r\n    response.setStatus(HttpServletResponse.SC_NOT_FOUND);\r\n    response.sendRedirect(\"/error\");\r\n%>\r\n```",
+    "options": {
+      "A": "/error",
+      "B": "Không chuyển hướng vì có lỗi 404",
+      "C": "Trình duyệt đứng yên",
+      "D": "Lỗi biên dịch"
+    },
+    "answer": "A",
+    "explanation": "Dù setStatus là 404, lệnh `sendRedirect` tiếp theo sẽ ghi đè và gửi mã 302 chuyển hướng về `/error`. (Thực tế lệnh sau đè lệnh trước trên response header)."
+  },
+  {
+    "id": 33,
+    "text": "Tính output của đoạn logic tính lượt truy cập (visitCount) dùng application scope nếu 3 client A, B, C lần lượt truy cập:\r\n```jsp\r\n<%\r\n    Integer count = (Integer) application.getAttribute(\"count\");\r\n    if (count == null) count = 1;\r\n    else count++;\r\n    application.setAttribute(\"count\", count);\r\n%>\r\n<%= application.getAttribute(\"count\") %>\r\n```",
+    "options": {
+      "A": "Mỗi client đều thấy số 1",
+      "B": "Client C sẽ thấy số 3",
+      "C": "Lỗi NullPointerException",
+      "D": "Client C sẽ thấy số 1"
+    },
+    "answer": "B",
+    "explanation": "Vì `application` chia sẻ giữa TẤT CẢ clients, nên biến count tăng dần: A(1) -> B(2) -> C(3)."
+  },
+  {
+    "id": 34,
+    "text": "Cho code sử dụng pageContext:\r\n```jsp\r\n<%\r\n    pageContext.setAttribute(\"msg\", \"A\", PageContext.REQUEST_SCOPE);\r\n    request.setAttribute(\"msg\", \"B\");\r\n%>\r\n<%= pageContext.getAttribute(\"msg\", PageContext.REQUEST_SCOPE) %>\r\n```\r\nOutput là gì?",
+    "options": {
+      "A": "A",
+      "B": "B",
+      "C": "Lỗi biên dịch",
+      "D": "null"
+    },
+    "answer": "B",
+    "explanation": "`pageContext.setAttribute(..., REQUEST_SCOPE)` và `request.setAttribute(...)` trỏ tới cùng một nơi. Lệnh thứ 2 đã ghi đè \"A\" thành \"B\"."
+  },
+  {
+    "id": 35,
+    "text": "Kết quả in ra của `out` trong ví dụ sau:\r\n```jsp\r\n<%\r\n    out.print(\"Hi\");\r\n    out.clearBuffer();\r\n    out.print(\"Hello\");\r\n%>\r\n```",
+    "options": {
+      "A": "HiHello",
+      "B": "Hi",
+      "C": "Hello",
+      "D": "Lỗi Runtime"
+    },
+    "answer": "C",
+    "explanation": "`out.clearBuffer()` xóa dữ liệu đã lưu trong buffer (từ \"Hi\"), sau đó ghi \"Hello\" vào, nên chỉ in ra \"Hello\"."
+  },
+  {
+    "id": 36,
+    "text": "(Tìm lỗi sai) Đoạn code lấy session nhưng sinh lỗi khi session chưa từng tồn tại và bạn muốn tránh tự động tạo. Lỗi nằm ở đâu?\r\n```jsp\r\n<%\r\n    HttpSession s = request.getSession();\r\n    if(s == null) { out.print(\"No session\"); }\r\n%>\r\n```",
+    "options": {
+      "A": "Phải ép kiểu `(HttpSession) request.getSession()`",
+      "B": "`request.getSession()` mặc định luôn tạo session mới nếu chưa có, nên `s` không bao giờ null.",
+      "C": "Không được dùng thẻ `<% %>` để gọi session.",
+      "D": "Biến s là từ khóa cấm."
+    },
+    "answer": "B",
+    "explanation": "`request.getSession()` tương đương `request.getSession(true)`, luôn trả về session. Để kiểm tra null, phải dùng `request.getSession(false)`."
+  },
+  {
+    "id": 37,
+    "text": "(Tìm lỗi sai) Đoạn code set Cookie sau thiếu hoặc sai thao tác gì để Cookie hoạt động gửi về client?\r\n```jsp\r\n<%\r\n    Cookie c = new Cookie(\"user\", \"admin\");\r\n    c.setMaxAge(3600);\r\n%>\r\n```",
+    "options": {
+      "A": "Khởi tạo cookie sai tham số.",
+      "B": "Quên gọi `response.addCookie(c);` để gửi về client.",
+      "C": "`setMaxAge` phải nhận kiểu chuỗi.",
+      "D": "Cookie là implicit object, không dùng `new`."
+    },
+    "answer": "B",
+    "explanation": "Tạo object Cookie xong cần được thêm vào response bằng `response.addCookie()` thì trình duyệt mới nhận được."
+  },
+  {
+    "id": 38,
+    "text": "(Tìm lỗi sai) Code sau lấy lỗi tại runtime `ClassCastException`. Vì sao?\r\n```jsp\r\n<%\r\n    session.setAttribute(\"age\", 25);\r\n    String userAge = (String) session.getAttribute(\"age\");\r\n%>\r\n```",
+    "options": {
+      "A": "Tên thuộc tính \"age\" không hợp lệ.",
+      "B": "Không thể setAttribute kiểu số (int/Integer).",
+      "C": "`getAttribute` trả về Object là `Integer` (từ số 25), ép kiểu sang `String` sẽ gây ClassCastException.",
+      "D": "Thuộc tính chưa được lưu vào session."
+    },
+    "answer": "C",
+    "explanation": "25 là Integer, không thể cast trực tiếp `(String)` từ Integer object trong Java."
+  },
+  {
+    "id": 39,
+    "text": "(Tìm lỗi sai) Tại sao đoạn JSP sau bị báo lỗi biên dịch biến không tồn tại?\r\n```jsp\r\n<%\r\n    ServletContext app = request.getServletContext();\r\n    application.setAttribute(\"hit\", 1);\r\n%>\r\n```",
+    "options": {
+      "A": "ServletContext sai package.",
+      "B": "Biến `application` là implicit object, việc khai báo `app` là thừa nhưng `application` vẫn có sẵn, không có lỗi biên dịch biến `application`.",
+      "C": "Code này không có lỗi biên dịch biến không tồn tại, nó hoàn toàn hợp lệ trong JSP.",
+      "D": "Sai tên hàm getServletContext."
+    },
+    "answer": "C",
+    "explanation": "`application` đã được Tomcat ngầm định cung cấp. Việc gọi `application.setAttribute` hoàn toàn hợp lệ (đây là câu hỏi edge case lừa)."
+  },
+  {
+    "id": 40,
+    "text": "(Tìm lỗi sai) Tại sao dùng implicit object `response` để gọi `response.getWriter()` trong JSP thường gây lỗi `IllegalStateException`?",
+    "options": {
+      "A": "JSP không có đối tượng response.",
+      "B": "JSP đã tự động mở một JspWriter (biến `out`), gọi `getWriter()` sẽ xung đột.",
+      "C": "`getWriter` bị deprecated trong Java 8.",
+      "D": "Phải import `java.io.PrintWriter` ở Directive."
+    },
+    "answer": "B",
+    "explanation": "Trong JSP, Tomcat đã lấy luồng output để tạo biến `out`. Việc gọi `response.getWriter()` lần nữa sẽ văng lỗi vì luồng đã được mở."
+  },
+  {
+    "id": 41,
+    "text": "Mục đích chính của JSP Include là gì?",
+    "options": {
+      "A": "Kết nối Database.",
+      "B": "Biên dịch code Java nhanh hơn.",
+      "C": "Tái sử dụng giao diện (như header, footer) để tránh lặp code.",
+      "D": "Ẩn mã nguồn của trang web."
+    },
+    "answer": "C",
+    "explanation": "Tài liệu giải thích include dùng để tách header/footer dùng chung, tránh lặp code ở mỗi JSP."
+  },
+  {
+    "id": 42,
+    "text": "Page Directive Include (`<%@ include %>`) thực hiện ghép nối file vào thời điểm nào?",
+    "options": {
+      "A": "Chạy (Runtime)",
+      "B": "Biên dịch (Translation time)",
+      "C": "Khởi tạo biến (Instantiation)",
+      "D": "Hủy (Destruction)"
+    },
+    "answer": "B",
+    "explanation": "Tính chất của Page Directive Include là nhúng file lúc biên dịch (Translation time)."
+  },
+  {
+    "id": 43,
+    "text": "Khi dùng `<%@ include file=\"...\" %>`, Tomcat sinh ra bao nhiêu Servlet cho trang gốc và trang được include?",
+    "options": {
+      "A": "1 Servlet (kết hợp 2 file thành 1).",
+      "B": "2 Servlet riêng biệt.",
+      "C": "Không sinh ra Servlet nào.",
+      "D": "Phụ thuộc vào số lượng vòng lặp."
+    },
+    "answer": "A",
+    "explanation": "Tài liệu ghi rõ Directive include \"Kết hợp 2 file thành 1 servlet\"."
+  },
+  {
+    "id": 44,
+    "text": "JSP Action Include có cú pháp như thế nào?",
+    "options": {
+      "A": "<% jsp:include file=\"page.jsp\" %>",
+      "B": "<jsp:include page=\"path/to/file.jsp\" />",
+      "C": "<%@ action include=\"page.jsp\" %>",
+      "D": "<include src=\"page.jsp\" />"
+    },
+    "answer": "B",
+    "explanation": "Cú pháp chuẩn của JSP Action Include là `<jsp:include page=\"...\" />`."
+  },
+  {
+    "id": 45,
+    "text": "JSP Action Include (`<jsp:include>`) thực hiện lúc nào?",
+    "options": {
+      "A": "Lúc biên dịch",
+      "B": "Lúc khởi động server",
+      "C": "Lúc chạy (runtime)",
+      "D": "Lúc load class"
+    },
+    "answer": "C",
+    "explanation": "Tính chất của Action Include là nhúng file lúc chạy (runtime)."
+  },
+  {
+    "id": 46,
+    "text": "Thẻ nào dùng để truyền Parameter khi sử dụng `<jsp:include>`?",
+    "options": {
+      "A": "<jsp:parameter>",
+      "B": "<jsp:param name=\"...\" value=\"...\" />",
+      "C": "<jsp:arg name=\"...\" value=\"...\" />",
+      "D": "<jsp:pass name=\"...\" value=\"...\" />"
+    },
+    "answer": "B",
+    "explanation": "Cú pháp để truyền param là `<jsp:param name=\"...\" value=\"...\" />` nằm bên trong khối include."
+  },
+  {
+    "id": 47,
+    "text": "Đặc điểm nào ĐÚNG khi so sánh Page Directive Include và JSP Action Include?",
+    "options": {
+      "A": "Directive include sinh ra nhiều Servlet.",
+      "B": "Action include nhanh hơn Directive include.",
+      "C": "Directive include chia sẻ biến trực tiếp vì cùng 1 servlet.",
+      "D": "Action include không thể truyền parameter."
+    },
+    "answer": "C",
+    "explanation": "Bảng so sánh (10.4) ghi rõ Directive include chia sẻ biến (cùng servlet), trong khi Action Include thì không (servlet riêng)."
+  },
+  {
+    "id": 48,
+    "text": "Để include một menu thay đổi liên tục theo user login, ta NÊN dùng loại include nào?",
+    "options": {
+      "A": "Page Directive (`<%@ include %>`)",
+      "B": "JSP Action (`<jsp:include>`)",
+      "C": "Cả 2 đều chậm như nhau",
+      "D": "Không dùng include được"
+    },
+    "answer": "B",
+    "explanation": "JSP Action Include thích hợp cho Content động và linh hoạt hơn vì được xử lý tại runtime."
+  },
+  {
+    "id": 49,
+    "text": "Thuộc tính nào BẮT BUỘC có trong `<jsp:include>`?",
+    "options": {
+      "A": "file",
+      "B": "page",
+      "C": "href",
+      "D": "src"
+    },
+    "answer": "B",
+    "explanation": "Cú pháp là `<jsp:include page=\"...\" />`. Thuộc tính `page` là bắt buộc."
+  },
+  {
+    "id": 50,
+    "text": "Thuộc tính nào BẮT BUỘC có trong `<%@ include %>`?",
+    "options": {
+      "A": "page",
+      "B": "file",
+      "C": "url",
+      "D": "class"
+    },
+    "answer": "B",
+    "explanation": "Cú pháp là `<%@ include file=\"...\" %>`."
+  },
+  {
+    "id": 51,
+    "text": "Output của quá trình Directive Include với file `main.jsp` và `var.jsp` dưới đây:\r\n`var.jsp`: `<% int x = 100; %>`\r\n`main.jsp`: `<%@ include file=\"var.jsp\" %> <%= x %>`",
+    "options": {
+      "A": "100",
+      "B": "Lỗi x chưa được định nghĩa",
+      "C": "null",
+      "D": "<%= x %>"
+    },
+    "answer": "A",
+    "explanation": "Do biên dịch thành 1 file Servlet, biến `x` khai báo trong `var.jsp` hoàn toàn sử dụng được ở `main.jsp`. Output là 100."
+  },
+  {
+    "id": 52,
+    "text": "Output khi dùng Action Include với đoạn code tương tự:\r\n`var.jsp`: `<% int y = 50; %>`\r\n`main.jsp`: `<jsp:include page=\"var.jsp\" /> <%= y %>`",
+    "options": {
+      "A": "50",
+      "B": "Lỗi y không thể resolve thành một biến (biên dịch thất bại)",
+      "C": "null",
+      "D": "Không in gì cả"
+    },
+    "answer": "B",
+    "explanation": "Action Include xử lý tại runtime ở 2 Servlet khác nhau. `main.jsp` không thấy được biến local `y` khai báo trong `var.jsp`."
+  },
+  {
+    "id": 53,
+    "text": "Output của đoạn code JSP Action truyền Parameter:\r\n`main.jsp`: `<jsp:include page=\"sub.jsp\"><jsp:param name=\"id\" value=\"99\"/></jsp:include>`\r\n`sub.jsp`: `<%= request.getParameter(\"id\") %>`",
+    "options": {
+      "A": "null",
+      "B": "99",
+      "C": "Lỗi không tìm thấy id",
+      "D": "<%= request.getParameter(\"id\") %>"
+    },
+    "answer": "B",
+    "explanation": "Parameter \"id\" với giá trị \"99\" được truyền sang `sub.jsp` và in ra thành công."
+  },
+  {
+    "id": 54,
+    "text": "Xét layout gồm header.jsp, content.jsp, footer.jsp. Nếu bạn sửa giao diện HTML trong `header.jsp` (Directive include), Tomcat sẽ làm gì khi user truy cập `content.jsp` có include header?",
+    "options": {
+      "A": "Chỉ biên dịch lại header.jsp",
+      "B": "Phải biên dịch lại `content.jsp` vì code gộp thành 1 Servlet.",
+      "C": "Bỏ qua không cập nhật vì đã cache.",
+      "D": "Tomcat crash."
+    },
+    "answer": "B",
+    "explanation": "Vì Directive include nối file lúc biên dịch, khi file con đổi, file cha (`content.jsp`) phải dịch lại để thấy thay đổi."
+  },
+  {
+    "id": 55,
+    "text": "(Output) File `count.jsp` chứa `<% int i=0; out.print(++i); %>`. File `main.jsp` gọi `<jsp:include page=\"count.jsp\"/>` hai lần liên tiếp. Output trên trình duyệt là?",
+    "options": {
+      "A": "1 2",
+      "B": "1 1",
+      "C": "2 2",
+      "D": "Lỗi do biến i trùng"
+    },
+    "answer": "B",
+    "explanation": "Action Include gọi file riêng tại runtime. Mỗi lần gọi, scriptlet trong `count.jsp` chạy tạo biến local `i=0` rồi tăng lên 1, in ra 1. Hai lần đều in 1."
+  },
+  {
+    "id": 56,
+    "text": "(Tìm lỗi sai) Đoạn code sử dụng tham số Action Include bị sai ở đâu?\r\n```jsp\r\n<jsp:include page=\"menu.jsp\">\r\n    <!-- Truyen bien -->\r\n    <jsp:param name=\"role\" value=\"admin\" />\r\n</jsp:include>\r\n```",
+    "options": {
+      "A": "Thẻ comment HTML `<!-- -->` nằm bên trong thẻ `jsp:include` sẽ gây lỗi biên dịch.",
+      "B": "Thuộc tính `value` thiếu ngoặc kép.",
+      "C": "Thiếu dấu chấm phẩy ở thuộc tính name.",
+      "D": "Không có lỗi."
+    },
+    "answer": "A",
+    "explanation": "Cú pháp nghiêm ngặt, thẻ `<jsp:include>` không được chứa bất kỳ text template (như khoảng trắng thừa hoặc thẻ comment HTML) xen giữa các thẻ `<jsp:param>`. Sẽ văng JasperException."
+  },
+  {
+    "id": 57,
+    "text": "(Tìm lỗi sai) Lỗi gây hỏng ứng dụng khi biên dịch với thẻ Include:\r\n`pageA.jsp`: `<%@ include file=\"pageB.jsp\" %>`\r\n`pageB.jsp`: `<%@ include file=\"pageA.jsp\" %>`",
+    "options": {
+      "A": "Thiếu tham số truyền vào",
+      "B": "Lỗi vòng lặp vô hạn (Infinite recursive include) lúc biên dịch",
+      "C": "Lỗi sai phiên bản Tomcat",
+      "D": "Biến bị đè nhau"
+    },
+    "answer": "B",
+    "explanation": "A gọi B, B gọi lại A qua Directive include lúc translation time sẽ làm compiler rơi vào vòng lặp vô tận / tràn stack."
+  },
+  {
+    "id": 58,
+    "text": "(Tìm lỗi sai) Lỗi trong file `main.jsp` khi include `config.jsp` chứa `<% String db = \"MySQL\"; %>`:\r\n```jsp\r\n<%@ include file=\"config.jsp\" %>\r\n<% String db = \"Oracle\"; %>\r\n```",
+    "options": {
+      "A": "Tên file sai.",
+      "B": "Biến `db` đã được khai báo ở `config.jsp`, khai báo lại `String db = \"Oracle\";` trong cùng Servlet sẽ gây lỗi \"Duplicate local variable\".",
+      "C": "Không được phép gán đè chuỗi trong Java.",
+      "D": "Phải dùng Action Include."
+    },
+    "answer": "B",
+    "explanation": "Directive Include gộp 2 file. Khai báo biến 2 lần cùng tên (String db) trong 1 scope (`_jspService`) sẽ sinh lỗi Java compilation duplicate variable."
+  },
+  {
+    "id": 59,
+    "text": "(Tìm lỗi sai) Tại sao thẻ Action include này báo lỗi không tìm thấy page?\r\n```jsp\r\n<jsp:include page=\"<%= dynamicPath %>\" />\r\n```",
+    "options": {
+      "A": "Không được dùng Expression `<%= %>` trong thuộc tính page.",
+      "B": "Thiếu extension .jsp",
+      "C": "`dynamicPath` không tồn tại hoặc bị null tại runtime.",
+      "D": "Action include bắt buộc đường dẫn tĩnh (static string)."
+    },
+    "answer": "C",
+    "explanation": "`<jsp:include>` cho phép thuộc tính page nhận giá trị biểu thức `<%= %>` (runtime evaluation). Lỗi thường là do biến truyền vào bị null hoặc sai path."
+  },
+  {
+    "id": 60,
+    "text": "(Tìm lỗi sai) Cú pháp Directive include dưới đây sai ở đâu?\r\n```jsp\r\n<%@ include page=\"footer.jsp\" %>\r\n```",
+    "options": {
+      "A": "Thẻ include thiếu dấu đóng `/>`.",
+      "B": "Thuộc tính `page` là của `<jsp:include>`, Directive include phải dùng thuộc tính `file`.",
+      "C": "Bị dư ký tự `@`.",
+      "D": "Thiếu thẻ `<jsp:param>`."
+    },
+    "answer": "B",
+    "explanation": "Cú pháp đúng là `<%@ include file=\"...\" %>`."
+  },
+  {
+    "id": 61,
+    "text": "EL (Expression Language) trong JSP bắt đầu bằng ký tự và dấu ngoặc gì?",
+    "options": {
+      "A": "<%= %>",
+      "B": "<% %>",
+      "C": "${ }",
+      "D": "#{ }"
+    },
+    "answer": "C",
+    "explanation": "Theo tài liệu 11.1, cú pháp EL là `${ expression }`."
+  },
+  {
+    "id": 62,
+    "text": "Mục đích chính của EL là gì?",
+    "options": {
+      "A": "Viết các logic kết nối cơ sở dữ liệu thay Java.",
+      "B": "Cung cấp cách đơn giản hơn để truy cập và hiển thị dữ liệu trong JSP thay vì dùng Scriptlet.",
+      "C": "Biên dịch giao diện HTML.",
+      "D": "Import các class Java."
+    },
+    "answer": "B",
+    "explanation": "EL giúp truy cập dữ liệu đơn giản, code JSP sạch hơn, tránh Scriptlet phức tạp."
+  },
+  {
+    "id": 63,
+    "text": "Thứ tự ưu tiên (Automatic Lookup) khi tìm kiếm biến của EL nếu không chỉ định rõ Scope là gì?",
+    "options": {
+      "A": "sessionScope → requestScope → applicationScope → pageScope",
+      "B": "pageScope → requestScope → sessionScope → applicationScope",
+      "C": "applicationScope → sessionScope → requestScope → pageScope",
+      "D": "requestScope → sessionScope → pageScope → applicationScope"
+    },
+    "answer": "B",
+    "explanation": "Tài liệu 11.3 ghi rõ thứ tự: pageScope → requestScope → sessionScope → applicationScope."
+  },
+  {
+    "id": 64,
+    "text": "Dạng Dot Notation (`.`) trong EL dùng để làm gì?",
+    "options": {
+      "A": "Gọi method của Java.",
+      "B": "Lấy giá trị phần tử của Mảng (Array).",
+      "C": "Truy cập property của Object (ví dụ `user.name`).",
+      "D": "Gọi CSS class."
+    },
+    "answer": "C",
+    "explanation": "`user.name` tương đương `user.getName()`, dùng để truy cập thuộc tính của Object."
+  },
+  {
+    "id": 65,
+    "text": "Khi dùng Bracket Notation trong EL, cú pháp nào truy cập phần tử mảng hợp lệ?",
+    "options": {
+      "A": "${ array.0 }",
+      "B": "${ array(0) }",
+      "C": "${ array[0] }",
+      "D": "${ array<0> }"
+    },
+    "answer": "C",
+    "explanation": "Truy cập mảng dùng dấu ngoặc vuông: `${ array[0] }`."
+  },
+  {
+    "id": 66,
+    "text": "Để lấy request parameter có tên là \"email\" trong EL, dùng object ngầm định nào của EL?",
+    "options": {
+      "A": "${ request.email }",
+      "B": "${ param.email }",
+      "C": "${ parameter.email }",
+      "D": "${ req.email }"
+    },
+    "answer": "B",
+    "explanation": "Theo mục 11.5, lấy param dùng `${ param.email }`."
+  },
+  {
+    "id": 67,
+    "text": "Để lấy Header \"User-Agent\" trong EL, cú pháp nào đúng?",
+    "options": {
+      "A": "${ header['User-Agent'] }",
+      "B": "${ header.User-Agent }",
+      "C": "${ request.header('User-Agent') }",
+      "D": "${ headers['User-Agent'] }"
+    },
+    "answer": "A",
+    "explanation": "Vì tên header có dấu gạch ngang (không phải biến hợp lệ), phải dùng bracket notation `${ header['User-Agent'] }`."
+  },
+  {
+    "id": 68,
+    "text": "Toán tử `empty` trong EL dùng để làm gì?",
+    "options": {
+      "A": "Xóa một biến khỏi scope.",
+      "B": "Kiểm tra xem một object/list/chuỗi có bị null hoặc rỗng không.",
+      "C": "Gán giá trị null cho biến.",
+      "D": "Kiểm tra bộ nhớ trống của Tomcat."
+    },
+    "answer": "B",
+    "explanation": "`${ empty user }` trả về true nếu biến user là null, chuỗi rỗng, hoặc collection rỗng."
+  },
+  {
+    "id": 69,
+    "text": "Hàm JSTL EL nào dùng để lấy độ dài của chuỗi hoặc danh sách?",
+    "options": {
+      "A": "fn:size()",
+      "B": "fn:len()",
+      "C": "fn:count()",
+      "D": "fn:length()"
+    },
+    "answer": "D",
+    "explanation": "Tài liệu cung cấp ví dụ `${ fn:length(list) }`."
+  },
+  {
+    "id": 70,
+    "text": "Import thư viện EL functions (`fn`) bằng directive nào?",
+    "options": {
+      "A": "<%@ taglib prefix=\"fn\" uri=\"http://java.sun.com/jsp/jstl/functions\" %>",
+      "B": "<%@ import fn=\"java.util.functions\" %>",
+      "C": "<%@ taglib prefix=\"fn\" uri=\"jstl/core\" %>",
+      "D": "<jsp:useBean id=\"fn\" />"
+    },
+    "answer": "A",
+    "explanation": "Mục 11.7 ghi rõ URI import: `http://java.sun.com/jsp/jstl/functions`."
+  },
+  {
+    "id": 71,
+    "text": "Output của phép toán EL: `${ 12 % 5 }` là bao nhiêu?",
+    "options": {
+      "A": "2.4",
+      "B": "2",
+      "C": "7",
+      "D": "Lỗi cú pháp"
+    },
+    "answer": "B",
+    "explanation": "Toán tử `%` là chia lấy dư, 12 chia 5 dư 2."
+  },
+  {
+    "id": 72,
+    "text": "Giả sử biến `age` trong request scope bằng 20. Output của `${ age > 18 ? \"Adult\" : \"Minor\" }` là gì?",
+    "options": {
+      "A": "Minor",
+      "B": "Adult",
+      "C": "true",
+      "D": "20"
+    },
+    "answer": "B",
+    "explanation": "Toán tử 3 ngôi (Ternary), 20 > 18 là true nên in ra \"Adult\"."
+  },
+  {
+    "id": 73,
+    "text": "Giả sử list hobbies có 2 phần tử [\"Gaming\", \"Coding\"]. Output của `${ fn:join(hobbies, \" - \") }` là gì?",
+    "options": {
+      "A": "Gaming Coding",
+      "B": "Gaming,Coding",
+      "C": "Gaming - Coding",
+      "D": "[Gaming, Coding]"
+    },
+    "answer": "C",
+    "explanation": "Hàm `fn:join` nối mảng bằng ký tự phân cách \" - \"."
+  },
+  {
+    "id": 74,
+    "text": "Đoạn mã cài đặt attribute: `session.setAttribute(\"role\", \"admin\"); request.setAttribute(\"role\", \"user\");`. Kết quả của `${ role }` in ra gì?",
+    "options": {
+      "A": "admin",
+      "B": "user",
+      "C": "adminuser",
+      "D": "null"
+    },
+    "answer": "B",
+    "explanation": "EL tự động tìm kiếm theo thứ tự `requestScope` trước `sessionScope`, nên sẽ tìm thấy \"user\" và in ra."
+  },
+  {
+    "id": 75,
+    "text": "Giả sử có URL: `/app?id=5&id=10`. Output của `${ paramValues.id[1] }` là gì?",
+    "options": {
+      "A": "5",
+      "B": "10",
+      "C": "5,10",
+      "D": "Lỗi index"
+    },
+    "answer": "B",
+    "explanation": "`paramValues` trả về array tham số. Index `1` là giá trị thứ 2, tức là 10."
+  },
+  {
+    "id": 76,
+    "text": "(Tìm lỗi sai) Biến EL nào truy cập thuộc tính sẽ bị lỗi nếu class User KHÔNG định nghĩa method `getAddress()`?",
+    "options": {
+      "A": "${ user.address }",
+      "B": "${ user[\"address\"] }",
+      "C": "Cả A và B đều không xuất ra kết quả và có thể báo lỗi PropertyNotFoundException.",
+      "D": "Không có lỗi, EL tự động trả về \"null\"."
+    },
+    "answer": "C",
+    "explanation": "EL sử dụng Reflection để gọi getter. Nếu không có `getAddress()`, gọi `user.address` sẽ văng `PropertyNotFoundException`."
+  },
+  {
+    "id": 77,
+    "text": "(Tìm lỗi sai) Biểu thức EL sau sai cú pháp ở điểm nào?\r\n`${ \"Hello \" + name }` (Giả sử đang chạy bản Servlet/EL cũ trước 3.0)",
+    "options": {
+      "A": "EL chuẩn không dùng toán tử `+` để nối chuỗi (phải dùng hàm hoặc viết liền).",
+      "B": "Tên biến không được để cạnh dấu cộng.",
+      "C": "Thiếu thẻ `<c:out>`.",
+      "D": "Phải dùng dấu nháy đơn `'Hello'`."
+    },
+    "answer": "A",
+    "explanation": "Trong EL truyền thống, `+` chỉ dành cho phép toán số học. Nó sẽ cố ép kiểu \"Hello \" thành số và văng lỗi. (Nối chuỗi ghi `${\"Hello \"}${name}`)."
+  },
+  {
+    "id": 78,
+    "text": "(Tìm lỗi sai) Viết `${ param.role == 'admin' }` nhưng luôn trả về false dù URL là `?role=admin `. Vấn đề do đâu?",
+    "options": {
+      "A": "Dấu nháy đơn `'admin'` sai, phải dùng nháy kép.",
+      "B": "Toán tử `==` không hoạt động với chuỗi trong EL.",
+      "C": "Có khoảng trắng ẩn phía sau \"admin \" trên URL, cần dùng `fn:trim()` hoặc gửi đúng param.",
+      "D": "Thuộc tính `param` không tồn tại."
+    },
+    "answer": "C",
+    "explanation": "Giá trị parameter trên URL là `admin ` (có khoảng trắng), chuỗi khác \"admin\" nên ra false. `==` dùng so sánh chuỗi (equals) trong EL rất tốt."
+  },
+  {
+    "id": 79,
+    "text": "(Tìm lỗi sai) Đoạn code `<p>Size: ${ list.size() }</p>` có thể hoạt động nhưng cách viết chuẩn EL Bracket Notation/Functions cho mảng/list là gì để tương thích mọi phiên bản?",
+    "options": {
+      "A": "${ fn:length(list) }",
+      "B": "${ list.length }",
+      "C": "${ size(list) }",
+      "D": "${ fn:size(list) }"
+    },
+    "answer": "A",
+    "explanation": "Để đếm số lượng phần tử Collection an toàn, tài liệu cung cấp hàm chuẩn của JSTL là `${ fn:length(list) }`."
+  },
+  {
+    "id": 80,
+    "text": "(Tìm lỗi sai) Khi gọi `${ appName }` in ra rỗng, dù trong `web.xml` có `<context-param><param-name>appName</param-name>...`. Tại sao?",
+    "options": {
+      "A": "`appName` không tự động map từ `context-param` vào Application Scope attributes. Phải dùng `${ initParam.appName }`.",
+      "B": "EL không đọc được Application scope.",
+      "C": "web.xml bị lỗi.",
+      "D": "Thuộc tính phải viết hoa."
+    },
+    "answer": "A",
+    "explanation": "Tham số từ `<context-param>` là Init Parameter, trong EL phải dùng implicit object riêng là `initParam` (e.g. `${ initParam.appName }`) chứ không nằm ngay ở attribute chung."
+  },
+  {
+    "id": 81,
+    "text": "JSTL là viết tắt của từ gì?",
+    "options": {
+      "A": "Java Script Template Library",
+      "B": "Java Standard Tag Logic",
+      "C": "JavaServer Pages Standard Tag Library",
+      "D": "Java Servlet Tag Library"
+    },
+    "answer": "C",
+    "explanation": "Tài liệu giải thích JSTL = JavaServer Pages Standard Tag Library."
+  },
+  {
+    "id": 82,
+    "text": "Mục đích cốt lõi của việc sử dụng JSTL là gì?",
+    "options": {
+      "A": "Thay thế hoàn toàn HTML.",
+      "B": "Chạy ứng dụng nhanh hơn 10 lần.",
+      "C": "Cung cấp các tag tiêu chuẩn để thay thế Scriptlet, giúp code sạch hơn.",
+      "D": "Tự động mã hóa mật khẩu."
+    },
+    "answer": "C",
+    "explanation": "JSTL sinh ra để loại bỏ các thẻ `<% %>` Scriptlet java, thay bằng các tag XML-like cho code dễ đọc."
+  },
+  {
+    "id": 83,
+    "text": "Prefix mặc định thường được dùng cho thư viện JSTL Core là gì?",
+    "options": {
+      "A": "j",
+      "B": "core",
+      "C": "c",
+      "D": "jstl"
+    },
+    "answer": "C",
+    "explanation": "Quy ước tiêu chuẩn là `<%@ taglib prefix=\"c\" ... %>`."
+  },
+  {
+    "id": 84,
+    "text": "Thẻ JSTL Core nào dùng để gán giá trị cho một biến?",
+    "options": {
+      "A": "<c:assign>",
+      "B": "<c:var>",
+      "C": "<c:set>",
+      "D": "<c:put>"
+    },
+    "answer": "C",
+    "explanation": "Thẻ `<c:set var=\"name\" value=\"giá_trị\" />` dùng để gán giá trị."
+  },
+  {
+    "id": 85,
+    "text": "Thẻ `<c:if>` trong JSTL bắt buộc phải có thuộc tính nào để đánh giá điều kiện?",
+    "options": {
+      "A": "condition",
+      "B": "check",
+      "C": "test",
+      "D": "validate"
+    },
+    "answer": "C",
+    "explanation": "Cú pháp: `<c:if test=\"${...}\">`."
+  },
+  {
+    "id": 86,
+    "text": "Cấu trúc nào trong JSTL tương đương với switch/case hoặc if/else if/else trong Java?",
+    "options": {
+      "A": "<c:switch>, <c:case>, <c:default>",
+      "B": "<c:choose>, <c:when>, <c:otherwise>",
+      "C": "<c:if>, <c:elseif>, <c:else>",
+      "D": "<c:condition>, <c:match>, <c:fail>"
+    },
+    "answer": "B",
+    "explanation": "Theo mục 12.3, cấu trúc switch/case là `<c:choose>`, `<c:when test=\"...\">`, và `<c:otherwise>`."
+  },
+  {
+    "id": 87,
+    "text": "Thẻ `<c:forEach>` dùng để làm gì?",
+    "options": {
+      "A": "Hiển thị thông báo lỗi.",
+      "B": "Nhúng file JSP khác.",
+      "C": "Lặp qua một collection hoặc lặp với số đếm (begin, end).",
+      "D": "Xóa cache trình duyệt."
+    },
+    "answer": "C",
+    "explanation": "`<c:forEach>` dùng để Loop (vòng lặp)."
+  },
+  {
+    "id": 88,
+    "text": "Hai file jar nào bắt buộc phải có trong thư mục `WEB-INF/lib` (đối với ứng dụng cũ không build bằng Maven) để dùng JSTL?",
+    "options": {
+      "A": "servlet-api.jar và jsp-api.jar",
+      "B": "jstl-api-1.2.jar và jstl-impl-1.2.jar",
+      "C": "jdbc.jar và mysql.jar",
+      "D": "core.jar và tags.jar"
+    },
+    "answer": "B",
+    "explanation": "Tài liệu nêu rõ cần `jstl-api-1.2.jar` và `jstl-impl-1.2.jar` (hoặc javax.servlet.jsp.jstl-1.2.x.jar)."
+  },
+  {
+    "id": 89,
+    "text": "URI nào dùng để import JSTL Core library?",
+    "options": {
+      "A": "http://java.sun.com/jsp/jstl/core",
+      "B": "http://jstl.java.com/core",
+      "C": "http://tomcat.apache.org/jstl",
+      "D": "https://java.sun.com/tags/core"
+    },
+    "answer": "A",
+    "explanation": "URI chuẩn là `http://java.sun.com/jsp/jstl/core`."
+  },
+  {
+    "id": 90,
+    "text": "Với đoạn code `<c:set target=\"${user}\" property=\"age\" value=\"25\" />`, điều kiện gì bắt buộc về Object `user`?",
+    "options": {
+      "A": "Phải là một String.",
+      "B": "Phải được tạo bằng Scriptlet.",
+      "C": "Phải có method `setAge(int/String age)` chuẩn JavaBean.",
+      "D": "Không cần điều kiện gì."
+    },
+    "answer": "C",
+    "explanation": "`<c:set target... property...>` sử dụng Reflection, yêu cầu object target phải có public setter tương ứng (`setAge`)."
+  },
+  {
+    "id": 91,
+    "text": "Output của đoạn code vòng lặp JSTL sau là gì?\r\n```jsp\r\n<c:forEach var=\"i\" begin=\"1\" end=\"3\">\r\n    ${i} \r\n</c:forEach>\r\n```",
+    "options": {
+      "A": "1 2 3",
+      "B": "0 1 2 3",
+      "C": "1 2",
+      "D": "i i i"
+    },
+    "answer": "A",
+    "explanation": "Thuộc tính `begin=\"1\" end=\"3\"` nghĩa là lặp từ 1 đến 3 (bao gồm cả 3), in ra 1 2 3."
+  },
+  {
+    "id": 92,
+    "text": "Cho đoạn code JSTL:\r\n```jsp\r\n<c:set var=\"score\" value=\"8\" />\r\n<c:choose>\r\n    <c:when test=\"${score > 9}\">A</c:when>\r\n    <c:when test=\"${score > 7}\">B</c:when>\r\n    <c:otherwise>C</c:otherwise>\r\n</c:choose>\r\n```\r\nKết quả hiển thị là gì?",
+    "options": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "Không in gì"
+    },
+    "answer": "B",
+    "explanation": "score = 8. Điều kiện đầu `8 > 9` sai. Điều kiện hai `8 > 7` đúng -> In ra \"B\" và thoát choose."
+  },
+  {
+    "id": 93,
+    "text": "Output đoạn code tính toán với EL và c:set:\r\n```jsp\r\n<c:set var=\"price\" value=\"${ 10 * 2 }\" scope=\"request\" />\r\n<c:if test=\"${ requestScope.price == 20 }\">OK</c:if>\r\n```",
+    "options": {
+      "A": "20",
+      "B": "OK",
+      "C": "false",
+      "D": "Lỗi do value chứa EL"
+    },
+    "answer": "B",
+    "explanation": "`price` được gán = 20. Khối `<c:if>` đánh giá `${20 == 20}` là true, in ra \"OK\"."
+  },
+  {
+    "id": 94,
+    "text": "Giả sử có danh sách `users = [\"Tom\", \"Jerry\"]`. Code JSTL lặp qua mảng in kết quả gì?\r\n```jsp\r\n<c:forEach items=\"${users}\" var=\"u\">\r\n    ${u}\r\n</c:forEach>\r\n```",
+    "options": {
+      "A": "[Tom, Jerry]",
+      "B": "users",
+      "C": "Tom Jerry",
+      "D": "u u"
+    },
+    "answer": "C",
+    "explanation": "`items` nhận collection. Nó duyệt từng phần tử gán vào biến `u`. Sẽ in ra \"Tom Jerry\"."
+  },
+  {
+    "id": 95,
+    "text": "Khối code `<c:if test=\"${empty param.search}\">No search</c:if>` sẽ in \"No search\" khi nào?",
+    "options": {
+      "A": "URL là `/page?search=java`",
+      "B": "URL là `/page` (không truyền search)",
+      "C": "URL là `/page?query=search`",
+      "D": "Cả B và C đều đúng."
+    },
+    "answer": "D",
+    "explanation": "`empty param.search` trả về true khi không có tham số tên \"search\" trên URL. Do đó B (không có param) và C (chỉ có param tên `query`) đều in ra \"No search\"."
+  },
+  {
+    "id": 96,
+    "text": "(Tìm lỗi sai) Đoạn code JSTL `<c:if>` dưới đây sinh lỗi do đâu?\r\n```jsp\r\n<c:if test=\"true\">\r\n    Show\r\n</c:if>\r\n```",
+    "options": {
+      "A": "Thuộc tính test nhận giá trị boolean chuỗi tĩnh mà không dùng EL `${}` (vẫn hợp lệ nhưng không linh hoạt, tuy nhiên nếu Tomcat strict có thể bắt lỗi hoặc chạy sai logic nếu là biến).",
+      "B": "Trong JSP chuẩn, test bắt buộc phải chứa `${...}` khi evaluate điều kiện logic động. Nếu chỉ viết `test=\"true\"` nó chạy (ra true) nhưng đây không phải lỗi phổ biến. Khoan, lỗi là thiếu khai báo thư viện Taglib ở đầu trang. Nếu thiếu `<%@ taglib ... %>`, tag này in nguyên `<c:if test=\"true\">` ra HTML.",
+      "C": "Thiếu thẻ đóng.",
+      "D": "Taglib prefix phải là `jstl`."
+    },
+    "answer": "B",
+    "explanation": "Đây là lỗi kinh điển ở người mới: Quên khai báo `<%@ taglib prefix=\"c\"...%>` ở đầu JSP, khiến Tomcat không hiểu thẻ `<c:...>`, kết quả nó in thẳng chuỗi text HTML vô nghĩa ra trình duyệt."
+  },
+  {
+    "id": 97,
+    "text": "(Tìm lỗi sai) Tại sao đoạn code loop báo lỗi ServletException / NumberFormatException?\r\n```jsp\r\n<c:forEach var=\"i\" begin=\"${1}\" end=\"text\">\r\n    ${i}\r\n</c:forEach>\r\n```",
+    "options": {
+      "A": "Tên biến \"i\" không hợp lệ.",
+      "B": "Thuộc tính `begin` không hỗ trợ EL.",
+      "C": "Thuộc tính `end` bắt buộc phải là số hoặc EL trả về số, chuỗi \"text\" gây lỗi định dạng.",
+      "D": "Lỗi do không có items."
+    },
+    "answer": "C",
+    "explanation": "Thuộc tính `begin` và `end` của `<c:forEach>` mong đợi kiểu số nguyên. Truyền cứng chữ \"text\" không thể parse sang số, ném Exception."
+  },
+  {
+    "id": 98,
+    "text": "(Tìm lỗi sai) Code `<c:when>` báo lỗi khi đặt bên ngoài `<c:choose>`. Tại sao?\r\n```jsp\r\n<c:when test=\"${true}\">True</c:when>\r\n```",
+    "options": {
+      "A": "Thẻ `<c:when>` chỉ được phép nằm con trực tiếp bên trong thẻ `<c:choose>`.",
+      "B": "Thuộc tính test sai.",
+      "C": "Cần `<c:otherwise>` đi kèm.",
+      "D": "Thẻ không cần body."
+    },
+    "answer": "A",
+    "explanation": "Cú pháp quy định `<c:when>` và `<c:otherwise>` BẮT BUỘC là thẻ con của `<c:choose>`, tương tự như `case` nằm trong `switch`."
+  },
+  {
+    "id": 99,
+    "text": "(Tìm lỗi sai) Thuộc tính `var` trong `<c:set>` hoạt động sai ý định trong trường hợp sau:\r\n```jsp\r\n<c:set var=\"${myVar}\" value=\"10\" />\r\n```",
+    "options": {
+      "A": "Thuộc tính `var` dùng để CHỈ ĐỊNH TÊN chuỗi tĩnh cho biến mới, không được dùng EL `${...}` trừ khi mượn tên động. Ghi `${myVar}` thường gây rỗng/lỗi nếu `myVar` chưa định nghĩa.",
+      "B": "Thuộc tính value phải là số thực.",
+      "C": "Thiếu thuộc tính scope.",
+      "D": "Bắt buộc phải có thẻ đóng `</c:set>`."
+    },
+    "answer": "A",
+    "explanation": "Thuộc tính `var` nhận tên biến dạng chuỗi tĩnh (vd: `var=\"myVar\"`). Đặt EL `${myVar}` vào `var` sẽ lấy giá trị hiện hành của `myVar` làm TÊN biến, dễ sinh lỗi tên biến rỗng (Null/Empty String) gây Exception."
+  },
+  {
+    "id": 100,
+    "text": "(Tìm lỗi sai) Bạn viết code sau để gán property cho đối tượng, nhưng có lỗi xảy ra:\r\n```jsp\r\n<c:set target=\"user\" property=\"age\" value=\"25\" />",
+    "options": {
+      "A": "Thuộc tính target nhận chuỗi tĩnh \"user\" thay vì Expression ${user}.",
+      "B": "Thiếu thuộc tính scope.",
+      "C": "Property age không tồn tại.",
+      "D": "Lỗi cú pháp JSTL."
+    },
+    "answer": "A",
+    "explanation": "Target phải là một Expression ${user} chứ không phải chuỗi \"user\"."
+  }
+];

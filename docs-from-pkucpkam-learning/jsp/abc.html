@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSP Mastery Quiz | Luyện Thi Trắc Nghiệm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="questions.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --error: #ef4444;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        .option-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #f1f5f9;
+        }
+
+        .option-card:hover:not(.disabled) {
+            border-color: var(--primary);
+            background-color: #f5f3ff;
+            transform: translateX(4px);
+        }
+
+        .option-card.selected {
+            border-color: var(--primary);
+            background-color: #f5f3ff;
+            box-shadow: 0 4px 12px -2px rgba(99, 102, 241, 0.15);
+        }
+
+        .option-card.correct {
+            border-color: var(--success);
+            background-color: #ecfdf5;
+        }
+
+        .option-card.wrong {
+            border-color: var(--error);
+            background-color: #fef2f2;
+        }
+
+        .progress-bar-fill {
+            transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            background-size: 200% 100%;
+            animation: gradient-move 3s linear infinite;
+        }
+
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .sidebar-item {
+            transition: all 0.2s;
+        }
+
+        .sidebar-item:hover {
+            transform: scale(1.05);
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        pre code {
+            display: block;
+            padding: 1rem;
+            background: #1e293b;
+            color: #f8fafc;
+            border-radius: 0.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="min-h-screen flex flex-col">
+        
+        <!-- Loading State -->
+        <div v-if="loading" class="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
+            <div class="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
+            <p class="text-slate-500 font-medium animate-pulse">Đang chuẩn bị câu hỏi...</p>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="glass-nav sticky top-0 z-40 px-4 py-3 sm:px-8">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-gradient-to-tr from-indigo-600 to-violet-600 p-2 rounded-xl shadow-lg shadow-indigo-200">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">JSP Mastery</h1>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">100 Question Challenge</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <div class="hidden md:flex flex-col items-end">
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-tighter">Tiến độ</span>
+                        <span class="text-sm font-bold text-slate-700">{{ progress }}%</span>
+                    </div>
+                    <div class="h-10 w-px bg-slate-200 hidden md:block"></div>
+                    <div class="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100">
+                        <div class="flex flex-col items-center">
+                            <span class="text-[10px] text-slate-400 font-bold uppercase">Điểm</span>
+                            <span class="text-lg font-black text-indigo-600 leading-none">{{ score }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dynamic Progress Bar -->
+            <div class="absolute bottom-0 left-0 w-full h-[3px] bg-slate-100">
+                <div class="progress-bar-fill h-full" :style="{ width: progress + '%' }"></div>
+            </div>
+        </nav>
+
+        <main class="flex-1 flex overflow-hidden">
+            <!-- Sidebar (Desktop) -->
+            <aside class="hidden lg:flex flex-col w-80 bg-white border-r border-slate-100 p-6 overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Lộ trình câu hỏi</h3>
+                    <span class="bg-indigo-50 text-indigo-600 text-[10px] font-bold px-2 py-1 rounded-md">{{ answeredCount }}/{{ questions.length }}</span>
+                </div>
+                
+                <div class="grid grid-cols-5 gap-2">
+                    <button v-for="(q, idx) in questions" :key="idx"
+                            @click="goToQuestion(idx)"
+                            class="sidebar-item h-10 w-10 flex items-center justify-center rounded-xl text-xs font-bold transition-all border shadow-sm"
+                            :class="[
+                                currentIdx === idx ? 'ring-2 ring-indigo-500 ring-offset-2 border-indigo-500 bg-indigo-50 text-indigo-600' : 
+                                q.status === 'correct' ? 'bg-emerald-50 border-emerald-100 text-emerald-600' :
+                                q.status === 'wrong' ? 'bg-rose-50 border-rose-100 text-rose-600' :
+                                'bg-white border-slate-100 text-slate-400 hover:border-indigo-300 hover:text-indigo-500'
+                            ]">
+                        {{ idx + 1 }}
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Quiz Content -->
+            <div class="flex-1 overflow-y-auto bg-[#f8fafc] p-4 md:p-12">
+                <div class="max-w-4xl mx-auto">
+                    
+                    <transition enter-active-class="animate__animated animate__fadeInUp" leave-active-class="animate__animated animate__fadeOutDown" mode="out-in">
+                        <div v-if="questions[currentIdx]" :key="currentIdx" class="space-y-6">
+                            
+                            <!-- Question Card -->
+                            <div class="bg-white rounded-3xl p-6 md:p-10 card-shadow border border-white relative overflow-hidden">
+                                <!-- Badge -->
+                                <div class="absolute top-0 right-0 p-6">
+                                    <span class="bg-slate-50 text-slate-400 text-[10px] font-black uppercase px-3 py-1 rounded-full border border-slate-100">
+                                        Level: Basic
+                                    </span>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h2 class="text-3xl font-black text-slate-800 mb-2">Câu {{ currentIdx + 1 }}</h2>
+                                    <div class="w-12 h-1.5 bg-indigo-500 rounded-full"></div>
+                                </div>
+
+                                <!-- Question Text -->
+                                <div class="text-lg md:text-xl text-slate-700 leading-relaxed font-medium mb-10" v-html="formatQuestion(questions[currentIdx].text)"></div>
+
+                                <!-- Options -->
+                                <div class="grid gap-4">
+                                    <div v-for="(val, key) in questions[currentIdx].options" :key="key"
+                                         @click="selectOption(key)"
+                                         class="option-card group relative flex items-center p-5 rounded-2xl cursor-pointer"
+                                         :class="[
+                                            questions[currentIdx].userAnswer === key ? 'selected' : '',
+                                            questions[currentIdx].checked && key === questions[currentIdx].answer ? 'correct' : '',
+                                            questions[currentIdx].checked && questions[currentIdx].userAnswer === key && key !== questions[currentIdx].answer ? 'wrong' : '',
+                                            questions[currentIdx].checked ? 'disabled pointer-events-none opacity-80' : ''
+                                         ]">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm transition-colors mr-4"
+                                             :class="[
+                                                questions[currentIdx].userAnswer === key ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-100 group-hover:text-indigo-600'
+                                             ]">
+                                            {{ key }}
+                                        </div>
+                                        <div class="flex-1 text-slate-700 font-semibold" v-html="formatInline(val)"></div>
+                                        
+                                        <!-- Icons -->
+                                        <div v-if="questions[currentIdx].checked && key === questions[currentIdx].answer" class="text-emerald-500 animate__animated animate__bounceIn">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                        </div>
+                                        <div v-if="questions[currentIdx].checked && questions[currentIdx].userAnswer === key && key !== questions[currentIdx].answer" class="text-rose-500 animate__animated animate__shakeX">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Explanation (Conditional) -->
+                            <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut">
+                                <div v-if="questions[currentIdx].checked" class="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-8 text-white shadow-xl">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div class="bg-white/20 p-2 rounded-lg">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </div>
+                                        <h3 class="text-xl font-extrabold">Giải thích chi tiết</h3>
+                                    </div>
+                                    <p class="text-indigo-50 leading-relaxed font-medium" v-html="formatQuestion(questions[currentIdx].explanation)"></p>
+                                </div>
+                            </transition>
+
+                            <!-- Navigation Controls -->
+                            <div class="flex justify-between items-center pt-6">
+                                <button @click="prevQuestion" :disabled="currentIdx === 0" 
+                                        class="flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-slate-500 hover:bg-white hover:text-indigo-600 disabled:opacity-30 transition-all">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                                    Câu trước
+                                </button>
+
+                                <div class="flex gap-4">
+                                    <button v-if="questions[currentIdx].checked" @click="nextQuestion"
+                                            class="bg-slate-800 hover:bg-slate-900 px-8 py-4 rounded-2xl text-white font-bold shadow-lg transition-all flex items-center gap-2 animate__animated animate__fadeInRight">
+                                        Tiếp theo
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </transition>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const { createApp, ref, computed, onMounted } = Vue;
+
+        createApp({
+            setup() {
+                const questions = ref([]);
+                const currentIdx = ref(0);
+                const score = ref(0);
+                const loading = ref(true);
+
+                const answeredCount = computed(() => questions.value.filter(q => q.checked).length);
+                const progress = computed(() => questions.value.length ? Math.round((answeredCount.value / questions.value.length) * 100) : 0);
+
+                const fetchData = async () => {
+                    try {
+                        let data = [];
+                        if (window.QUIZ_DATA) {
+                            data = window.QUIZ_DATA;
+                        } else {
+                            const response = await fetch('questions.json');
+                            data = await response.json();
+                        }
+                        
+                        questions.value = data.map(q => ({
+                            ...q,
+                            userAnswer: null,
+                            checked: false,
+                            status: 'pending'
+                        }));
+                    } catch (error) {
+                        console.error('Fetch error:', error);
+                    } finally {
+                        loading.value = false;
+                    }
+                };
+
+                const selectOption = (key) => {
+                    const q = questions.value[currentIdx.value];
+                    if (q.checked) return;
+                    q.userAnswer = key;
+                    checkAnswer();
+                };
+
+                const checkAnswer = () => {
+                    const q = questions.value[currentIdx.value];
+                    if (!q.userAnswer) return;
+                    
+                    q.checked = true;
+                    if (q.userAnswer === q.answer) {
+                        q.status = 'correct';
+                        score.value += 10; // 10 points per correct answer
+                    } else {
+                        q.status = 'wrong';
+                    }
+                };
+
+                const nextQuestion = () => {
+                    if (currentIdx.value < questions.value.length - 1) {
+                        currentIdx.value++;
+                    }
+                };
+
+                const prevQuestion = () => {
+                    if (currentIdx.value > 0) {
+                        currentIdx.value--;
+                    }
+                };
+
+                const goToQuestion = (idx) => {
+                    currentIdx.value = idx;
+                };
+
+                const formatQuestion = (text) => {
+                    if (!text) return '';
+                    // Convert code blocks
+                    text = text.replace(/```jsp([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+                    // Convert inline code
+                    text = text.replace(/`(.*?)`/g, '<code class="bg-slate-100 text-indigo-600 px-1.5 py-0.5 rounded font-mono text-sm">$1</code>');
+                    // Convert newlines
+                    return text.replace(/\n/g, '<br>');
+                };
+
+                const formatInline = (text) => {
+                    if (!text) return '';
+                    return text.replace(/`(.*?)`/g, '<code class="bg-slate-100 text-indigo-600 px-1 rounded font-mono text-sm">$1</code>');
+                };
+
+                onMounted(fetchData);
+
+                return {
+                    questions, currentIdx, score, loading,
+                    answeredCount, progress,
+                    selectOption, checkAnswer, nextQuestion, prevQuestion, goToQuestion,
+                    formatQuestion, formatInline
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
